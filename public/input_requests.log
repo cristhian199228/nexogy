@@ -1,0 +1,557 @@
+array(2) {
+  ["messages"]=>
+  array(1) {
+    [0]=>
+    array(16) {
+      ["id"]=>
+      string(43) "false_51961498695@c.us_3EB092304016408DE0C9"
+      ["body"]=>
+      string(6) "asfasf"
+      ["fromMe"]=>
+      bool(false)
+      ["self"]=>
+      int(1)
+      ["isForwarded"]=>
+      int(0)
+      ["author"]=>
+      string(16) "51961498695@c.us"
+      ["time"]=>
+      int(1615298384)
+      ["chatId"]=>
+      string(16) "51961498695@c.us"
+      ["messageNumber"]=>
+      int(199)
+      ["type"]=>
+      string(4) "chat"
+      ["senderName"]=>
+      string(16) "Cristhian Vargas"
+      ["caption"]=>
+      NULL
+      ["quotedMsgBody"]=>
+      NULL
+      ["quotedMsgId"]=>
+      NULL
+      ["quotedMsgType"]=>
+      NULL
+      ["chatName"]=>
+      string(16) "Cristhian Vargas"
+    }
+  }
+  ["instanceId"]=>
+  string(6) "231706"
+}
+
+array(2) {
+  ["messages"]=>
+  array(1) {
+    [0]=>
+    array(16) {
+      ["id"]=>
+      string(42) "true_51961498695@c.us_3EB01F85B91552C1512A"
+      ["body"]=>
+      string(329) "Bienvenido al servicio de Whatsapp de International SOS
+Commands:
+1. chatId - show ID of the current chat
+2. time - show server time
+3. me - show your nickname
+4. file [format] - get a file. Available formats: doc/gif/jpg/png/pdf/mp3/mp4
+5. ptt - get a voice message
+6. geo - get a location
+7. group - create a group with the bot"
+      ["fromMe"]=>
+      bool(true)
+      ["self"]=>
+      int(1)
+      ["isForwarded"]=>
+      int(0)
+      ["author"]=>
+      string(16) "51941036255@c.us"
+      ["time"]=>
+      int(1615298386)
+      ["chatId"]=>
+      string(16) "51961498695@c.us"
+      ["messageNumber"]=>
+      int(200)
+      ["type"]=>
+      string(4) "chat"
+      ["senderName"]=>
+      string(17) "International SOS"
+      ["caption"]=>
+      NULL
+      ["quotedMsgBody"]=>
+      NULL
+      ["quotedMsgId"]=>
+      NULL
+      ["quotedMsgType"]=>
+      NULL
+      ["chatName"]=>
+      string(16) "Cristhian Vargas"
+    }
+  }
+  ["instanceId"]=>
+  string(6) "231706"
+}
+
+array(2) {
+  ["messages"]=>
+  array(1) {
+    [0]=>
+    array(16) {
+      ["id"]=>
+      string(43) "false_51961498695@c.us_3EB040FBC45A46114551"
+      ["body"]=>
+      string(6) "asfasf"
+      ["fromMe"]=>
+      bool(false)
+      ["self"]=>
+      int(1)
+      ["isForwarded"]=>
+      int(0)
+      ["author"]=>
+      string(16) "51961498695@c.us"
+      ["time"]=>
+      int(1615298719)
+      ["chatId"]=>
+      string(16) "51961498695@c.us"
+      ["messageNumber"]=>
+      int(201)
+      ["type"]=>
+      string(4) "chat"
+      ["senderName"]=>
+      string(16) "Cristhian Vargas"
+      ["caption"]=>
+      NULL
+      ["quotedMsgBody"]=>
+      NULL
+      ["quotedMsgId"]=>
+      NULL
+      ["quotedMsgType"]=>
+      NULL
+      ["chatName"]=>
+      string(16) "Cristhian Vargas"
+    }
+  }
+  ["instanceId"]=>
+  string(6) "231706"
+}
+
+array(2) {
+  ["messages"]=>
+  array(1) {
+    [0]=>
+    array(16) {
+      ["id"]=>
+      string(42) "true_51961498695@c.us_3EB0A631AE77D024F1E9"
+      ["body"]=>
+      string(352) "Bienvenido al servicio de Whatsapp de International 
+Seleccione la opcion de su interes:
+1. chatId - show ID of the current chat
+2. time - show server time
+3. me - show your nickname
+4. file [format] - get a file. Available formats: doc/gif/jpg/png/pdf/mp3/mp4
+5. ptt - get a voice message
+6. geo - get a location
+7. group - create a group with the bot"
+      ["fromMe"]=>
+      bool(true)
+      ["self"]=>
+      int(1)
+      ["isForwarded"]=>
+      int(0)
+      ["author"]=>
+      string(16) "51941036255@c.us"
+      ["time"]=>
+      int(1615298721)
+      ["chatId"]=>
+      string(16) "51961498695@c.us"
+      ["messageNumber"]=>
+      int(202)
+      ["type"]=>
+      string(4) "chat"
+      ["senderName"]=>
+      string(17) "International SOS"
+      ["caption"]=>
+      NULL
+      ["quotedMsgBody"]=>
+      NULL
+      ["quotedMsgId"]=>
+      NULL
+      ["quotedMsgType"]=>
+      NULL
+      ["chatName"]=>
+      string(16) "Cristhian Vargas"
+    }
+  }
+  ["instanceId"]=>
+  string(6) "231706"
+}
+
+array(2) {
+  ["messages"]=>
+  array(1) {
+    [0]=>
+    array(16) {
+      ["id"]=>
+      string(43) "false_51961498695@c.us_3EB00EF1AF0363608FDD"
+      ["body"]=>
+      string(3) "asd"
+      ["fromMe"]=>
+      bool(false)
+      ["self"]=>
+      int(1)
+      ["isForwarded"]=>
+      int(0)
+      ["author"]=>
+      string(16) "51961498695@c.us"
+      ["time"]=>
+      int(1615299223)
+      ["chatId"]=>
+      string(16) "51961498695@c.us"
+      ["messageNumber"]=>
+      int(214)
+      ["type"]=>
+      string(4) "chat"
+      ["senderName"]=>
+      string(16) "Cristhian Vargas"
+      ["caption"]=>
+      NULL
+      ["quotedMsgBody"]=>
+      NULL
+      ["quotedMsgId"]=>
+      NULL
+      ["quotedMsgType"]=>
+      NULL
+      ["chatName"]=>
+      string(16) "Cristhian Vargas"
+    }
+  }
+  ["instanceId"]=>
+  string(6) "231706"
+}
+
+array(2) {
+  ["messages"]=>
+  array(1) {
+    [0]=>
+    array(16) {
+      ["id"]=>
+      string(42) "true_51961498695@c.us_3EB0DB86475A36C9E557"
+      ["body"]=>
+      string(350) "Bienvenido al servicio de Whatsapp de International 
+Seleccione la opcion de su inter:
+1. chatId - show ID of the current chat
+2. time - show server time
+3. me - show your nickname
+4. file [format] - get a file. Available formats: doc/gif/jpg/png/pdf/mp3/mp4
+5. ptt - get a voice message
+6. geo - get a location
+7. group - create a group with the bot"
+      ["fromMe"]=>
+      bool(true)
+      ["self"]=>
+      int(1)
+      ["isForwarded"]=>
+      int(0)
+      ["author"]=>
+      string(16) "51941036255@c.us"
+      ["time"]=>
+      int(1615299225)
+      ["chatId"]=>
+      string(16) "51961498695@c.us"
+      ["messageNumber"]=>
+      int(215)
+      ["type"]=>
+      string(4) "chat"
+      ["senderName"]=>
+      string(17) "International SOS"
+      ["caption"]=>
+      NULL
+      ["quotedMsgBody"]=>
+      NULL
+      ["quotedMsgId"]=>
+      NULL
+      ["quotedMsgType"]=>
+      NULL
+      ["chatName"]=>
+      string(16) "Cristhian Vargas"
+    }
+  }
+  ["instanceId"]=>
+  string(6) "231706"
+}
+
+array(2) {
+  ["messages"]=>
+  array(1) {
+    [0]=>
+    array(16) {
+      ["id"]=>
+      string(43) "false_51961498695@c.us_3EB0B3E1747D3E3A6BCA"
+      ["body"]=>
+      string(3) "asd"
+      ["fromMe"]=>
+      bool(false)
+      ["self"]=>
+      int(1)
+      ["isForwarded"]=>
+      int(0)
+      ["author"]=>
+      string(16) "51961498695@c.us"
+      ["time"]=>
+      int(1615299246)
+      ["chatId"]=>
+      string(16) "51961498695@c.us"
+      ["messageNumber"]=>
+      int(216)
+      ["type"]=>
+      string(4) "chat"
+      ["senderName"]=>
+      string(16) "Cristhian Vargas"
+      ["caption"]=>
+      NULL
+      ["quotedMsgBody"]=>
+      NULL
+      ["quotedMsgId"]=>
+      NULL
+      ["quotedMsgType"]=>
+      NULL
+      ["chatName"]=>
+      string(16) "Cristhian Vargas"
+    }
+  }
+  ["instanceId"]=>
+  string(6) "231706"
+}
+
+array(2) {
+  ["messages"]=>
+  array(1) {
+    [0]=>
+    array(16) {
+      ["id"]=>
+      string(42) "true_51961498695@c.us_3EB0AC07919EA1775E59"
+      ["body"]=>
+      string(350) "Bienvenido al servicio de Whatsapp de International 
+Seleccione la opcion de su inter:
+1. chatId - show ID of the current chat
+2. time - show server time
+3. me - show your nickname
+4. file [format] - get a file. Available formats: doc/gif/jpg/png/pdf/mp3/mp4
+5. ptt - get a voice message
+6. geo - get a location
+7. group - create a group with the bot"
+      ["fromMe"]=>
+      bool(true)
+      ["self"]=>
+      int(1)
+      ["isForwarded"]=>
+      int(0)
+      ["author"]=>
+      string(16) "51941036255@c.us"
+      ["time"]=>
+      int(1615299248)
+      ["chatId"]=>
+      string(16) "51961498695@c.us"
+      ["messageNumber"]=>
+      int(217)
+      ["type"]=>
+      string(4) "chat"
+      ["senderName"]=>
+      string(17) "International SOS"
+      ["caption"]=>
+      NULL
+      ["quotedMsgBody"]=>
+      NULL
+      ["quotedMsgId"]=>
+      NULL
+      ["quotedMsgType"]=>
+      NULL
+      ["chatName"]=>
+      string(16) "Cristhian Vargas"
+    }
+  }
+  ["instanceId"]=>
+  string(6) "231706"
+}
+
+array(2) {
+  ["messages"]=>
+  array(1) {
+    [0]=>
+    array(16) {
+      ["id"]=>
+      string(43) "false_51961498695@c.us_3EB09DA7C2090C6FC834"
+      ["body"]=>
+      string(3) "asf"
+      ["fromMe"]=>
+      bool(false)
+      ["self"]=>
+      int(1)
+      ["isForwarded"]=>
+      int(0)
+      ["author"]=>
+      string(16) "51961498695@c.us"
+      ["time"]=>
+      int(1615299256)
+      ["chatId"]=>
+      string(16) "51961498695@c.us"
+      ["messageNumber"]=>
+      int(218)
+      ["type"]=>
+      string(4) "chat"
+      ["senderName"]=>
+      string(16) "Cristhian Vargas"
+      ["caption"]=>
+      NULL
+      ["quotedMsgBody"]=>
+      NULL
+      ["quotedMsgId"]=>
+      NULL
+      ["quotedMsgType"]=>
+      NULL
+      ["chatName"]=>
+      string(16) "Cristhian Vargas"
+    }
+  }
+  ["instanceId"]=>
+  string(6) "231706"
+}
+
+array(2) {
+  ["messages"]=>
+  array(1) {
+    [0]=>
+    array(16) {
+      ["id"]=>
+      string(42) "true_51961498695@c.us_3EB05E437E0471670CC6"
+      ["body"]=>
+      string(354) "Bienvenido al servicio de Whatsapp de International SOS 
+Seleccione la opcion de su inter:
+1. chatId - show ID of the current chat
+2. time - show server time
+3. me - show your nickname
+4. file [format] - get a file. Available formats: doc/gif/jpg/png/pdf/mp3/mp4
+5. ptt - get a voice message
+6. geo - get a location
+7. group - create a group with the bot"
+      ["fromMe"]=>
+      bool(true)
+      ["self"]=>
+      int(1)
+      ["isForwarded"]=>
+      int(0)
+      ["author"]=>
+      string(16) "51941036255@c.us"
+      ["time"]=>
+      int(1615299257)
+      ["chatId"]=>
+      string(16) "51961498695@c.us"
+      ["messageNumber"]=>
+      int(219)
+      ["type"]=>
+      string(4) "chat"
+      ["senderName"]=>
+      string(17) "International SOS"
+      ["caption"]=>
+      NULL
+      ["quotedMsgBody"]=>
+      NULL
+      ["quotedMsgId"]=>
+      NULL
+      ["quotedMsgType"]=>
+      NULL
+      ["chatName"]=>
+      string(16) "Cristhian Vargas"
+    }
+  }
+  ["instanceId"]=>
+  string(6) "231706"
+}
+
+array(2) {
+  ["messages"]=>
+  array(1) {
+    [0]=>
+    array(16) {
+      ["id"]=>
+      string(43) "false_51961498695@c.us_3EB07AF29B3088FBD451"
+      ["body"]=>
+      string(3) "asf"
+      ["fromMe"]=>
+      bool(false)
+      ["self"]=>
+      int(1)
+      ["isForwarded"]=>
+      int(0)
+      ["author"]=>
+      string(16) "51961498695@c.us"
+      ["time"]=>
+      int(1615299283)
+      ["chatId"]=>
+      string(16) "51961498695@c.us"
+      ["messageNumber"]=>
+      int(220)
+      ["type"]=>
+      string(4) "chat"
+      ["senderName"]=>
+      string(16) "Cristhian Vargas"
+      ["caption"]=>
+      NULL
+      ["quotedMsgBody"]=>
+      NULL
+      ["quotedMsgId"]=>
+      NULL
+      ["quotedMsgType"]=>
+      NULL
+      ["chatName"]=>
+      string(16) "Cristhian Vargas"
+    }
+  }
+  ["instanceId"]=>
+  string(6) "231706"
+}
+
+array(2) {
+  ["messages"]=>
+  array(1) {
+    [0]=>
+    array(16) {
+      ["id"]=>
+      string(42) "true_51961498695@c.us_3EB058FE7F1992BD4DAE"
+      ["body"]=>
+      string(115) "Bienvenido al servicio de Whatsapp de International SOS 
+Esta es una respuesta automatica , por favor no responder:"
+      ["fromMe"]=>
+      bool(true)
+      ["self"]=>
+      int(1)
+      ["isForwarded"]=>
+      int(0)
+      ["author"]=>
+      string(16) "51941036255@c.us"
+      ["time"]=>
+      int(1615299285)
+      ["chatId"]=>
+      string(16) "51961498695@c.us"
+      ["messageNumber"]=>
+      int(221)
+      ["type"]=>
+      string(4) "chat"
+      ["senderName"]=>
+      string(17) "International SOS"
+      ["caption"]=>
+      NULL
+      ["quotedMsgBody"]=>
+      NULL
+      ["quotedMsgId"]=>
+      NULL
+      ["quotedMsgType"]=>
+      NULL
+      ["chatName"]=>
+      string(16) "Cristhian Vargas"
+    }
+  }
+  ["instanceId"]=>
+  string(6) "231706"
+}
+
