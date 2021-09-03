@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api\v1;
 
 use App\EvidenciaRC;
 use App\FichaPaciente;
+use App\LlamadaNexogy;
 use App\Http\Controllers\Controller;
 use App\PacienteIsos;
 use App\Service\FiltroService;
@@ -248,22 +249,22 @@ class ModulosController extends Controller
 
     public function administradorPcr(Request $request) {
 
-        $collection = FichaPaciente::whereBetween(DB::raw('date(created_at)'), [
+        $collection = LlamadaNexogy::whereBetween(DB::raw('date(created_at)'), [
                 $request->fecha_inicio,
                 $request->fecha_final
             ])
-            ->whereHas("PacienteIsos", function($q) use ($request) {
+            /*->whereHas("PacienteIsos", function($q) use ($request) {
                 $q->search($request->buscar);
             })
             ->with("PcrPruebaMolecular.PcrEnvioMunoz",
                 "PcrPruebaMolecular.PcrFotoMuestra",
                 'PacienteIsos.Empresa',
                 'Estacion.Sede'
-            );
+            )*/;
 
         //dd($collection->get());
 
-        $filtro = new FiltroService($collection);
+        /*$filtro = new FiltroService($collection);
 
         if ($request->has('empresa')) {
             $filtro->empresa($request->empresa);
@@ -285,7 +286,7 @@ class ModulosController extends Controller
             $collection->whereHas('Estacion.Sede', function (Builder $q) use ($request){
                 return $q->where('idsedes', $request->sede);
             });
-        }
+        }*/
 
         $fichas = $collection->oldest()->paginate(15);
 

@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
+//use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Illuminate\Support\Facades\Response;
 
 class DeclaracionJuradaController extends Controller
 {
@@ -57,12 +60,45 @@ class DeclaracionJuradaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(string $path)
+    public function show(string $audio)
     {
         //
-        $file = '/DJ/' . $path;
-        $file = Storage::disk('ftp')->get($file);
-        return Image::make($file)->response();
+        //dd($audio);
+        $path = '/NEXOGY';
+        $fileName=$path.'/'.$audio;
+        
+        $file = Storage::disk('ftp')->get($fileName);
+        //$file = Storage::disk('local')->get($fileName);
+        /*return (new Response($file, 200))
+                  ->header('Content-Type', 'audio/mpeg');*/
+        $filesize = Storage::disk('ftp')->size($fileName);
+        //dd($filesize);
+        Storage::disk('local')->put($audio,$file);
+
+        // return response($file, 200)->header('Content-Type', $mime_type);
+
+        $size   = $filesize; // File size
+        $length = $size;           // Content length
+        $start  = 0;               // Start byte
+        $end    = $size - 1;       // End byte
+
+        $headersArray=[
+            'Accept-Ranges' => "bytes",
+            'Accept-Encoding' => "gzip, deflate",
+            'Pragma' => 'public',
+            'Expires' => '0',
+            'Cache-Control' => 'must-revalidate',
+            'Content-Transfer-Encoding' => 'binary',
+            'Content-Disposition' => ' inline; filename='.$audio,
+            'Content-Length' => $filesize,
+            'Content-Type' => "audio/mpeg",
+            'Connection' => "Keep-Alive",
+            'Content-Range' => 'bytes 0-'.$end .'/'.$size,
+            'X-Pad' => 'avoid browser bug',
+            'Etag' => $audio,
+        ];
+        return Response::make($file, 200, $headersArray);
+        //return response()->file('storage/app/'.$audio, $headersArray);
     }
 
     /**
@@ -83,7 +119,7 @@ class DeclaracionJuradaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request,$id)
+    public function destroy(Request $request, $id)
     {
         //
         $file = '/DJ/' . $request->path;

@@ -25,7 +25,8 @@
         "sass": "^1.26.11",
         "sass-loader": "^8.0.2",
         "vue": "^2.5.17",
-        "vue-template-compiler": "^2.6.10"
+        "vue-template-compiler": "^2.6.10",
+        "vuetify": "^2.5.8"
     },
     "dependencies": {
         "@amcharts/amcharts4": "^4.10.12",
@@ -42,7 +43,7 @@
         "vue-workflow-chart": "^0.4.5",
         "vue2-timeago": "^1.2.9",
         "vuedraggable": "^2.24.3",
-        "vuetify": "^2.3.10",
+        "vuetify-audio": "^0.3.3",
         "vuetify-loader": "^1.5.0",
         "vuex": "^3.6.0"
     }

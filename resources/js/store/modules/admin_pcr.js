@@ -46,6 +46,7 @@ const actions = {
             commit('SET_DATA', await res.data);
             commit('SET_LOADING_TABLE', false);
             dispatch('getTiposPcr');
+            console.log(res);
         } catch(e) {
             commit('SET_LOADING_TABLE', false);
         }
