@@ -20,6 +20,9 @@ const state = {
         sede: null,
         buscar: null,
         tipo: null,
+        direccion: null,
+        desde: null,
+        para: null
     }
 };
 const getters = {
@@ -38,7 +41,10 @@ const actions = {
                 resultado: state.filtros.resultado,
                 empresa: state.filtros.empresa,
                 sede: state.filtros.sede,
-                tipo: state.filtros.tipo
+                tipo: state.filtros.tipo,
+                direccion: state.filtros.direccion,
+                desde: state.filtros.desde,
+                para: state.filtros.para
             }
         };
         try {
@@ -188,6 +194,15 @@ const mutations = {
     },
     SET_FILTRO_TIPO(state, tipo){
         state.filtros.tipo = tipo;
+    },
+    SET_FILTRO_DIRECCION(state, direccion){
+        state.filtros.direccion = direccion;
+    },
+    SET_FILTRO_DESDE(state, desde){
+        state.filtros.desde = desde;
+    },
+    SET_FILTRO_PARA(state, para){
+        state.filtros.para = para;
     }
 };
 

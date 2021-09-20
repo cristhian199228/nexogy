@@ -12,7 +12,7 @@
       <template v-slot:activator="{ on, attrs }">
         <v-text-field
           v-model="dateStr"
-          label="Fechas"
+          label="Fecha"
           readonly
           v-bind="attrs"
           v-on="on"

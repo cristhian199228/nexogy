@@ -83,7 +83,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    SISTEMA DE CONTROL COVID 19
+                    NEXOGY API
                 </div>
             </div>
         </div>

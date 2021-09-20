@@ -33,11 +33,14 @@
         hide-default-footer
         :page.sync="getCurrentPage"
       >
-        <template v-slot:header.callID="{ header }">
+        <template v-slot:header.fecha="{ header }">
           <filtro-fecha :module="modulo" />
         </template>
-        <template v-slot:header.paciente_isos.full_name="{ header }">
-          <filtro-buscar :module="modulo" />
+        <template v-slot:header.Extension="{ header }">
+          <filtro-buscar-desde :module="modulo" />
+        </template>
+        <template v-slot:header.PhoneNumber="{ header }">
+          <filtro-buscar-para :module="modulo" />
         </template>
         <template v-slot:header.sede="{ header }">
           <filtro-sede :module="modulo" />
@@ -45,7 +48,7 @@
         <template v-slot:header.empresa="{ header }">
           <filtro-empresa :module="modulo" />
         </template>
-        <template v-slot:header.tipo="{ header }">
+        <template v-slot:header.Direction="{ header }">
           <filtro-tipo :module="modulo" />
         </template>
         <template v-slot:header.res="{ header }">
@@ -75,9 +78,12 @@
             }}</small>
           </template>
         </template>
-        <template v-slot:item.empresa="{ item }">
-          <template v-if="item.paciente_isos && item.paciente_isos.empresa">
-            <small>{{ item.paciente_isos.empresa.descripcion }}</small>
+        <template v-slot:item.Direction="{ item }">
+          <template v-if="item.Direction == 'Incoming'">
+            <v-icon color="blue darken-2">mdi-phone-incoming</v-icon>
+          </template>
+          <template v-if="item.Direction == 'Outgoing'">
+            <v-icon color="green darken-2">mdi-phone-outgoing</v-icon>
           </template>
         </template>
         <template v-slot:item.tipo="{ item }">
@@ -152,10 +158,16 @@
           </template>
         </template>
         <template v-slot:item.actions="{ item }">
-          <v-btn icon small @click="verFoto('/api/v1/dj/' + item.CallId)">
-            <v-icon small>mdi-play</v-icon>
-          </v-btn>
-         
+          <template v-if="item.estado == 1">
+            <v-btn icon small @click="verFoto(item)">
+              <v-icon color="red darken-2">mdi-stop</v-icon>
+            </v-btn>
+          </template>
+          <template v-else>
+            <v-btn icon small @click="verFoto(item)">
+              <v-icon color="green darken-2">mdi-play</v-icon>
+            </v-btn>
+          </template>
         </template>
       </v-data-table>
       <v-dialog max-width="600px" v-model="dialog.edit" persistent>
@@ -258,7 +270,8 @@ import UpdateFabButton from "../UpdateFabButton";
 import DialogUploadFotoPcr from "./DialogUploadFotoPcr";
 import Viewer from "v-viewer/src/component.vue";
 import FiltroFecha from "../headers/FiltroFecha";
-import FiltroBuscar from "../headers/FiltroBuscar";
+import FiltroBuscarDesde from "../headers/FiltroBuscarDesde";
+import FiltroBuscarPara from "../headers/FiltroBuscarPara";
 import FiltroSede from "../headers/FiltroSede";
 import FiltroEmpresa from "../headers/FiltroEmpresa";
 import FiltroTipo from "../headers/FiltroTipo";
@@ -275,7 +288,8 @@ export default {
     DialogUploadFotoPcr,
     Viewer,
     FiltroFecha,
-    FiltroBuscar,
+    FiltroBuscarDesde,
+    FiltroBuscarPara,
     FiltroSede,
     FiltroEmpresa,
     FiltroTipo,
@@ -286,19 +300,28 @@ export default {
     return {
       modulo: "admin_pcr",
       file: "",
+      audioinicio: 0,
+      audiofinal: 1,
       headers: [
         { text: "N°", align: "start", value: "contador", sortable: false },
-        { text: "CallID", value: "CallId", sortable: false },
-        { text: "CallerID", value: "CallerID", sortable: false },
-        { text: "CustomerInternalRef", value: "CustomerInternalRef", sortable: false },
-        { text: "DTMF", value: "DTMF", sortable: false },
-        { text: "DID", value: "DiD", sortable: false },
-        { text: "Direction", value: "Direction", sortable: false },
-        { text: "Duration", value: "Duration", sortable: false },
+        { text: "Fecha/Hora", value: "fecha", sortable: false },
         { text: "Extension", value: "Extension", sortable: false },
-        { text: "Flagged", value: "Flagged", sortable: false },
-        { text: "PhoneNumber", value: "PhoneNumber", sortable: false },
-        { text: "Fecha/Hora", value: "StartTime", sortable: false },
+        { text: "Para", value: "PhoneNumber", sortable: false },
+        //{ text: "CallID", value: "CallId", sortable: false },
+        //{ text: "CallerID", value: "CallerID", sortable: false },
+        { text: "Direction", value: "Direction", sortable: false },
+        { text: "Duración", value: "duracion", sortable: false },
+
+        {
+          text: "CustomerInternalRef",
+          value: "CustomerInternalRef",
+          sortable: false,
+        },
+        // { text: "DTMF", value: "DTMF", sortable: false },
+        // { text: "DID", value: "DiD", sortable: false },
+
+        // { text: "Flagged", value: "Flagged", sortable: false },
+
         { text: "Acciones", value: "actions", sortable: false },
       ],
       form: {
@@ -333,13 +356,13 @@ export default {
       "SET_SEDE",
     ]),
     ...mapActions("admin_pcr", ["deletePhoto", "getFichas"]),
-    audioFinish()
-    {
-      console.log('audiofinal');
+    audioFinish() {
+      console.log("audiofinal");
+      this.seleccionado.estado = 0;
     },
-    audioInit()
-    {
-      console.log('audioinicio');
+    audioInit(target) {
+      console.log("audioinicio");
+      this.seleccionado.estado = 1;
     },
     verCurva(curva) {
       this.curva = Object.assign({}, curva);
@@ -355,13 +378,11 @@ export default {
           ficha.pcr_prueba_molecular.idpcr_pruebas_moleculares
         );
     },
-    verFoto(ruta){
-      console.log(ruta);
-     // this.images = [];
-      //this.images.push(ruta);
-      //this.$viewer.show();
-      this.file = ruta+'.wav';
-      console.log(this.file);
+    verFoto(item) {
+      //console.log(item);
+      this.file = "/api/v1/dj/" + item.CallId + ".wav";
+      this.seleccionado = item.id;
+      //'/api/v1/dj/' + item.CallId
     },
     accionesEditarPM(ficha) {
       /*this.form.id_pm = ficha.pcr_prueba_molecular.idpcr_pruebas_moleculares;
@@ -372,8 +393,6 @@ export default {
       this.form.resultado = ficha.pcr_prueba_molecular.resultado;
       this.form.detalle = ficha.pcr_prueba_molecular.detalle;
       this.$store.commit("admin_pcr/SHOW_DIALOG_EDIT_PCR", true);*/
-
-
     },
     editPM() {
       this.$refs.observer.validate().then((isValid) => {
@@ -397,7 +416,7 @@ export default {
       const r = confirm("Esta seguro de eliminar la foto?");
       if (r) this.deletePhoto(id);
     },
-    
+
     inited(viewer) {
       this.$viewer = viewer;
     },

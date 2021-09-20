@@ -1,36 +1,49 @@
 <template>
   <div>
-    <v-select v-model="tipo" :items="tipos" label="Tipo" dense hide-details clearable
-              item-value="idtipo_prueba_molecular" item-text="descripcion" @click:clear="clear">
+    <v-select
+      v-model="direccion"
+      :items="items"
+      label="Dirección"
+      dense
+      hide-details
+      clearable
+      item-value="idtipo"
+      item-text="descripcion"
+      @click:clear="clear"
+    >
     </v-select>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['module'],
-  methods: {
+  data: () => ({
+    items: [
+      { idtipo: "Incoming", descripcion: "ENTRANTE" },
+      { idtipo: "Outgoing", descripcion: "SALIENTE" },
+    ],
+  }),
+
+  props: ["module"],
+   methods: {
     getFichas() {
       this.$store.dispatch(`${this.module}/getFichas`, 1)
     },
     clear() {
-      this.$store.commit(`${this.module}/SET_FILTRO_TIPO`, null)
+      this.$store.commit(`${this.module}/SET_FILTRO_DIRECCION`, null)
       this.getFichas()
     }
   },
   computed: {
-    tipo: {
-      get() {
-        return this.$store.state[this.module].filtros.tipo
+    direccion: {
+     get() {
+        return this.$store.state[this.module].filtros.direccion;
       },
       set(val) {
-        this.$store.commit(`${this.module}/SET_FILTRO_TIPO`, val)
-        this.getFichas()
-      }
+        this.$store.commit(`${this.module}/SET_FILTRO_DIRECCION`, val);
+        this.getFichas();
+      },
     },
-    tipos() {
-      return this.$store.state.admin_pcr.tipos
-    }
-  }
-}
+  },
+};
 </script>

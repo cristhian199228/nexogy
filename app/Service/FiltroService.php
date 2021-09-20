@@ -13,6 +13,19 @@ class FiltroService {
         $this->collection = $collection;
     }
 
+    public function desde($buscar) : void {
+        $this->collection->where('Extension', 'LIKE', '%' . $buscar . '%');
+        
+    }
+
+    public function para($buscar) : void {
+        $this->collection->where('PhoneNumber', 'LIKE', '%' . $buscar . '%');
+        
+    }
+    public function direccion($buscar) : void {
+        $this->collection->where('Direction', '=', $buscar );
+        
+    }
     public function empresa($buscar) : void {
         $this->collection->whereHas('PacienteIsos.Empresa', function (Builder $q) use ($buscar) {
             $q->where('descripcion', 'LIKE', '%' . $buscar . '%')

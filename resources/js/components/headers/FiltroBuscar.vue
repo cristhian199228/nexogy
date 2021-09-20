@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-text-field dense hide-details v-model="buscar" label="Paciente" append-icon="mdi-magnify" @click:append="getFichas"
+    <v-text-field dense hide-details v-model="buscar" label="De" append-icon="mdi-magnify" @click:append="getFichas"
                   @keyup.enter="getFichas" clearable @click:clear="clear" single-line></v-text-field>
   </div>
 </template>

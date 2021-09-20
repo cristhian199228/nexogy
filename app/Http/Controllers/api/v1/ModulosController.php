@@ -24,11 +24,11 @@ class ModulosController extends Controller
 
         $fichas = FichaPaciente::where('id_estacion', $request->estacion)
             ->where(DB::raw('DATE(created_at)'), now()->format('Y-m-d'))
-            ->whereHas("PacienteIsos", function($q) use ($buscar) {
+            ->whereHas("PacienteIsos", function ($q) use ($buscar) {
                 $q->search($buscar);
             })
-            ->with(["PacienteIsos" => function($q) {
-                $q->select('idpacientes','nombres','apellido_paterno','apellido_materno','idempresa')
+            ->with(["PacienteIsos" => function ($q) {
+                $q->select('idpacientes', 'nombres', 'apellido_paterno', 'apellido_materno', 'idempresa')
                     ->with("Empresa:idempresa,descripcion");
             }])
             ->with("DatosClinicos")
@@ -41,11 +41,11 @@ class ModulosController extends Controller
 
         $pagina = $fichas->currentPage();
         $total = $fichas->total();
-        $contador = $total - (15*($pagina-1));
+        $contador = $total - (15 * ($pagina - 1));
 
         foreach ($fichas as $ficha) {
             $paciente = $ficha->PacienteIsos;
-            $nom_completo = $paciente->nombres . " " .$paciente->apellido_paterno . " " .$paciente->apellido_materno;
+            $nom_completo = $paciente->nombres . " " . $paciente->apellido_paterno . " " . $paciente->apellido_materno;
             $paciente->nom_completo = Str::upper($nom_completo);
             $ficha->contador = $contador;
             $contador--;
@@ -54,26 +54,27 @@ class ModulosController extends Controller
         return $fichas;
     }
 
-    public function controlador(Request $request) {
+    public function controlador(Request $request)
+    {
 
         $buscar = $request->buscar;
 
         $fichas = FichaPaciente::whereDate('created_at', date('Y-m-d'))
             ->where('id_estacion', $request->estacion)
-            ->whereHas("PacienteIsos", function($q) use ($buscar) {
+            ->whereHas("PacienteIsos", function ($q) use ($buscar) {
                 $q->search($buscar);
             })
             ->with("PacienteIsos:idpacientes,nombres,apellido_paterno,apellido_materno,numero_documento,celular")
             ->with("AnexoTres:idanexotres,idfichapacientes,path")
             ->with(["PruebaSerologica" => function ($q) {
                 $q->withCount('EnvioWP')->latest();
-            }])            
+            }])
             ->latest()
             ->paginate(15);
 
         $pagina = $fichas->currentPage();
         $total = $fichas->total();
-        $contador = $total - (15*($pagina-1));
+        $contador = $total - (15 * ($pagina - 1));
 
         foreach ($fichas as $ficha) {
             $ficha->contador = $contador;
@@ -83,17 +84,18 @@ class ModulosController extends Controller
         return $fichas;
     }
 
-    public function pcr(Request $request) {
+    public function pcr(Request $request)
+    {
 
         $buscar = $request->buscar;
 
         $fichas = FichaPaciente::where(DB::raw('DATE(created_at)'), now()->format('Y-m-d'))
             ->where('id_estacion', $request->estacion)
-            ->whereHas("PacienteIsos", function($q) use ($buscar) {
+            ->whereHas("PacienteIsos", function ($q) use ($buscar) {
                 $q->search($buscar);
             })
-            ->with(["PacienteIsos" => function($q) {
-                $q->select('idpacientes','nombres','apellido_paterno','apellido_materno','idempresa','numero_documento')
+            ->with(["PacienteIsos" => function ($q) {
+                $q->select('idpacientes', 'nombres', 'apellido_paterno', 'apellido_materno', 'idempresa', 'numero_documento')
                     ->with("Empresa:idempresa,descripcion");
             }])
             ->with("PcrPruebaMolecular.FichaInvestigacion.FichaInvFoto", "PcrPruebaMolecular.PcrEnvioMunoz")
@@ -103,11 +105,11 @@ class ModulosController extends Controller
 
         $pagina = $fichas->currentPage();
         $total = $fichas->total();
-        $contador = $total - (15*($pagina-1));
+        $contador = $total - (15 * ($pagina - 1));
 
         foreach ($fichas as $ficha) {
             $paciente = $ficha->PacienteIsos;
-            $nom_completo = $paciente->nombres . " " .$paciente->apellido_paterno . " " .$paciente->apellido_materno;
+            $nom_completo = $paciente->nombres . " " . $paciente->apellido_paterno . " " . $paciente->apellido_materno;
             $paciente->nom_completo = Str::upper($nom_completo);
             $ficha->contador = $contador;
             $contador--;
@@ -122,7 +124,7 @@ class ModulosController extends Controller
             ->whereHas('Estacion', function ($q) use ($request) {
                 $q->where('estaciones.idsede', $request->sede);
             })
-            ->whereHas("PacienteIsos", function($q) use ($request) {
+            ->whereHas("PacienteIsos", function ($q) use ($request) {
                 $q->search($request->buscar);
             });
         $filtro = new FiltroService($collection);
@@ -152,12 +154,22 @@ class ModulosController extends Controller
         }
 
         $collection->with(["PruebaSerologica" => function ($q) {
-            $q->select('idpruebaserologicas','idfichapacientes','p1_positivo_recuperado','p1_react1gm','p1_positivo_persistente',
-                'p1_reactigg','p1_reactigm_igg','no_reactivo','created_at','p1_positivo_vacunado')
+            $q->select(
+                'idpruebaserologicas',
+                'idfichapacientes',
+                'p1_positivo_recuperado',
+                'p1_react1gm',
+                'p1_positivo_persistente',
+                'p1_reactigg',
+                'p1_reactigm_igg',
+                'no_reactivo',
+                'created_at',
+                'p1_positivo_vacunado'
+            )
                 ->withCount("EnvioWP")->where("invalido", 0)->whereNotNull("no_reactivo")->latest()->get();
-        }])->with(["PacienteIsos" => function($q) {
-            $q->select('idpacientes','nombres','apellido_paterno','apellido_materno','idempresa','numero_documento','celular')->with("Empresa:idempresa,descripcion");
-        }])->with("CitasMw","Estacion.Sede","DatosClinicos","AntecedentesEp",'Temperatura');
+        }])->with(["PacienteIsos" => function ($q) {
+            $q->select('idpacientes', 'nombres', 'apellido_paterno', 'apellido_materno', 'idempresa', 'numero_documento', 'celular')->with("Empresa:idempresa,descripcion");
+        }])->with("CitasMw", "Estacion.Sede", "DatosClinicos", "AntecedentesEp", 'Temperatura');
 
         $fichas = $collection->latest()->get();
         $contador = $fichas->count();
@@ -178,16 +190,17 @@ class ModulosController extends Controller
         return $fichas;
     }
 
-    public function supervisorPcr(Request $request) {
+    public function supervisorPcr(Request $request)
+    {
 
         $buscar = $request->buscar;
 
         $fichas = FichaPaciente::where(DB::raw('DATE(created_at)'), date('Y-m-d'))
-            ->whereHas("PacienteIsos", function($q) use ($buscar) {
+            ->whereHas("PacienteIsos", function ($q) use ($buscar) {
                 $q->search($buscar);
             })
-            ->with(["PacienteIsos" => function($q) {
-                $q->select('idpacientes','nombres','apellido_paterno','apellido_materno','idempresa','numero_documento')
+            ->with(["PacienteIsos" => function ($q) {
+                $q->select('idpacientes', 'nombres', 'apellido_paterno', 'apellido_materno', 'idempresa', 'numero_documento')
                     ->with("Empresa:idempresa,descripcion");
             }])
             ->with("Estacion.Sede")
@@ -198,11 +211,11 @@ class ModulosController extends Controller
 
         $pagina = $fichas->currentPage();
         $total = $fichas->total();
-        $contador = $total - (15*($pagina-1));
+        $contador = $total - (15 * ($pagina - 1));
 
         foreach ($fichas as $ficha) {
             $paciente = $ficha->PacienteIsos;
-            $nom_completo = $paciente->nombres . " " .$paciente->apellido_paterno . " " .$paciente->apellido_materno;
+            $nom_completo = $paciente->nombres . " " . $paciente->apellido_paterno . " " . $paciente->apellido_materno;
             $paciente->nom_completo = Str::upper($nom_completo);
             $ficha->Estacion->nom_estacion = getNomEstacion($ficha->Estacion);
             $ficha->contador = $contador;
@@ -212,24 +225,35 @@ class ModulosController extends Controller
         return $fichas;
     }
 
-    public function salud(Request $request) {
+    public function salud(Request $request)
+    {
 
         $pacientes = PacienteIsos::search($request->buscar)
             ->with(["FichaPaciente" => function ($q) {
-                $q->select('idficha_paciente','id_paciente','created_at')
+                $q->select('idficha_paciente', 'id_paciente', 'created_at')
                     ->with(["PruebaSerologica" => function ($q) {
-                        $q->select('idpruebaserologicas','idfichapacientes','p1_positivo_recuperado','p1_react1gm','p1_reactigg'
-                            ,'p1_reactigm_igg','no_reactivo','created_at','p1_positivo_persistente','p1_positivo_vacunado')
+                        $q->select(
+                            'idpruebaserologicas',
+                            'idfichapacientes',
+                            'p1_positivo_recuperado',
+                            'p1_react1gm',
+                            'p1_reactigg',
+                            'p1_reactigm_igg',
+                            'no_reactivo',
+                            'created_at',
+                            'p1_positivo_persistente',
+                            'p1_positivo_vacunado'
+                        )
                             ->where("invalido", 0)->whereNotNull("no_reactivo")->latest()->get();
                     }])
-                    ->with("PcrPruebaMolecular",'DatosClinicos','AntecedentesEp')->latest()->get();
+                    ->with("PcrPruebaMolecular", 'DatosClinicos', 'AntecedentesEp')->latest()->get();
             }])
             ->with('Empresa:idempresa,descripcion,nombrecomercial')
             ->latest()
             ->paginate(20);
 
         foreach ($pacientes as $paciente) {
-            if(count($paciente->FichaPaciente) > 0) {
+            if (count($paciente->FichaPaciente) > 0) {
                 foreach ($paciente->FichaPaciente as $ficha) {
                     $ficha->fecha = $ficha->created_at->format("d/m/y");
                     foreach ($ficha->PruebaSerologica as $ps) {
@@ -239,7 +263,6 @@ class ModulosController extends Controller
                             //no-op
                         }
                     }
-
                 }
             }
         }
@@ -247,12 +270,20 @@ class ModulosController extends Controller
         return $pacientes;
     }
 
-    public function administradorPcr(Request $request) {
+ 
 
-        $collection = LlamadaNexogy::whereBetween(DB::raw('date(created_at)'), [
+    public function administradorPcr(Request $request)
+    {
+
+        /*$collection = LlamadaNexogy::whereBetween(DB::raw('date(created_at)'), [
                 $request->fecha_inicio,
                 $request->fecha_final
-            ])
+            ])*/
+
+        $collection = LlamadaNexogy::whereBetween(DB::raw('date(StartTime)'), [
+            $request->fecha_inicio,
+            $request->fecha_final
+        ])
             /*->whereHas("PacienteIsos", function($q) use ($request) {
                 $q->search($request->buscar);
             })
@@ -264,12 +295,18 @@ class ModulosController extends Controller
 
         //dd($collection->get());
 
-        /*$filtro = new FiltroService($collection);
+        $filtro = new FiltroService($collection);
 
-        if ($request->has('empresa')) {
-            $filtro->empresa($request->empresa);
+        if ($request->has('desde')) {
+            $filtro->desde($request->desde);
         }
-
+        if ($request->has('para')) {
+            $filtro->para($request->para);
+        }
+        if ($request->has('direccion')) {
+            $filtro->direccion($request->direccion);
+        }
+/*
         if ($request->has('resultado')) {
             $filtro->pruebaMolecular($request->resultado);
         } else {
@@ -286,33 +323,41 @@ class ModulosController extends Controller
             $collection->whereHas('Estacion.Sede', function (Builder $q) use ($request){
                 return $q->where('idsedes', $request->sede);
             });
-        }*/
-
+        }
+*/
         $fichas = $collection->oldest()->paginate(15);
 
         $pagina = $fichas->currentPage();
         $total = $fichas->total();
-        $contador = $total - (15*($pagina-1));
+        $contador = $total - (15 * ($pagina - 1));
+
+        //echo gmdate("H:i:s", 685);
 
         foreach ($fichas as $ficha) {
             $ficha->contador = $contador;
-            $ficha->fecha = $ficha->created_at->format('d/m/Y');
+           /* $NuevaFecha = strtotime ( '-5 hour' , strtotime ($ficha->StartTime) ) ; 
+            $NuevaFecha = date ( 'd-m-Y h:i:s A' , $NuevaFecha); 
+            $ficha->fecha = $NuevaFecha;*/
+            //$ficha->fecha = $ficha->created_at->format('d/m/Y');
+            $ficha->fecha = $ficha->StartTime->format('d/m/Y h:i:s A');
+            $ficha->duracion = gmdate("H:i:s", $ficha->Duration);
             $contador--;
         }
 
         return $fichas;
     }
 
-    public function responceCenter(Request $request) {
+    public function responceCenter(Request $request)
+    {
 
-        $collection = EvidenciaRC::whereHas("paciente", function($q) use ($request) {
-                $q->search($request->buscar);
-            })
+        $collection = EvidenciaRC::whereHas("paciente", function ($q) use ($request) {
+            $q->search($request->buscar);
+        })
             /*->whereBetween(DB::raw('date(created_at)'), [
                 $request->fecha_inicio,
                 $request->fecha_final
             ])*/
-            ->with('paciente.Empresa','fichaEp.contactos','fichaCam','estacion')
+            ->with('paciente.Empresa', 'fichaEp.contactos', 'fichaCam', 'estacion')
             ->withCount('indicaciones');
 
         $service = new FiltroService($collection);
@@ -339,14 +384,14 @@ class ModulosController extends Controller
 
         $pagina = $evidencias->currentPage();
         $total = $evidencias->total();
-        $contador = $total - (30*($pagina-1));
+        $contador = $total - (30 * ($pagina - 1));
 
         foreach ($evidencias as $ev) {
             $ev->contador = $contador;
             $paciente = $ev->paciente;
-            $nom_completo = $paciente->nombres . " " .$paciente->apellido_paterno . " " .$paciente->apellido_materno;
+            $nom_completo = $paciente->nombres . " " . $paciente->apellido_paterno . " " . $paciente->apellido_materno;
             $paciente->nom_completo = Str::upper($nom_completo);
-            $ev->fecha = $ev->created_at? $ev->created_at->format('d/m/y H:i') : '';
+            $ev->fecha = $ev->created_at ? $ev->created_at->format('d/m/y H:i') : '';
             $pos = strpos($ev->usuario, "@");
             $str = Str::substr($ev->usuario, 0, $pos);
             $arr_str = explode(".", $str);
@@ -372,19 +417,20 @@ class ModulosController extends Controller
         return $evidencias;
     }
 
-    public function controladorPa(Request $request) {
+    public function controladorPa(Request $request)
+    {
 
         $fichas = FichaPaciente::whereDate('created_at', date('Y-m-d'))
             ->where('id_estacion', $request->id_estacion)
-            ->whereHas("PacienteIsos", function($q) use ($request) {
+            ->whereHas("PacienteIsos", function ($q) use ($request) {
                 $q->search($request->buscar);
             })
             ->with(['pruebaAntigena' => function ($q) {
                 $q->withCount('envio')
-                ->latest();
+                    ->latest();
             }])
-            ->with(["PacienteIsos" => function($q) {
-                $q->select('idpacientes','nombres','apellido_paterno','apellido_materno','idempresa','numero_documento')
+            ->with(["PacienteIsos" => function ($q) {
+                $q->select('idpacientes', 'nombres', 'apellido_paterno', 'apellido_materno', 'idempresa', 'numero_documento')
                     ->with("Empresa:idempresa,descripcion");
             }])
             ->with("AnexoTres:idanexotres,idfichapacientes,path")
@@ -392,7 +438,7 @@ class ModulosController extends Controller
 
         $pagina = $fichas->currentPage();
         $total = $fichas->total();
-        $contador = $total - (15 *( $pagina - 1));
+        $contador = $total - (15 * ($pagina - 1));
 
         foreach ($fichas as $ficha) {
             $ficha->contador = $contador;
